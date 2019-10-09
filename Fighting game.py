@@ -10,15 +10,15 @@ class Fighter:
         self.strength = strength
 
     def punch(self, who):
-        # Check if the attacker strength is smaller then the opponent defense.
-        # If not then substracts it from opponent health.
+        # Check if the attacker's strength is smaller then the opponent's defense.
+        # If not then subtract it from opponent's health.
         if (self.strength - who.defense < 0):
-            print("This attack has no effect. Enemy defense was too hight")
+            print("This attack has no effect. Enemy defense was too high")
 
         else:
             who.health -= self.strength - who.defense
 
-            # Check name of function that call this method to print if it's punch or special attack.
+            # Check name of function that call's this method to print if it's a punch or a special attack.
             if (stack()[1].function == "special"):
                 print(f"{self.name} used special attack on {who.name} "
                       f"and take him {self.strength - who.defense} points of health!")
