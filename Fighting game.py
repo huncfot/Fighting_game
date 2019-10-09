@@ -10,15 +10,16 @@ class Fighter:
         self.strength = strength
 
     def punch(self, who):
-# Check if the attacker strength is smaller then the opponent defense
-        if(self.strength - who.defense < 0):
+        # Check if the attacker strength is smaller then the opponent defense.
+        # If not then substracts it from opponent health.
+        if (self.strength - who.defense < 0):
             print("This attack has no effect. Enemy defense was too hight")
 
         else:
             who.health -= self.strength - who.defense
 
-# Check name of function that call this method to print if it's punch or special attack
-            if (stack()[1].function == "special" ):
+            # Check name of function that call this method to print if it's punch or special attack.
+            if (stack()[1].function == "special"):
                 print(f"{self.name} used special attack on {who.name} "
                       f"and take him {self.strength - who.defense} points of health!")
 
@@ -26,7 +27,6 @@ class Fighter:
                 print(f"{self.name} punch {who.name} and take him {self.strength - who.defense} points of health!")
 
     def kick(self, who):
-# Check if the attacker strength is smaller then the opponent defense
         if (self.strength * 1.5 < who.defense * 1.1):
             print("This attack has no effect. Enemy defense was too hight")
 
@@ -53,8 +53,8 @@ class Warrior(Fighter):
     def kick(self, who):
         super().kick(who)
 
+    # Some characters special ability is to attack, that's why 'who' is blank here. DO NOT remove.
     def special(self, who):
-
         self.strength += ((100 - self.health) * 0.25)
         self.health -= 10
         print(f"{self.name} used special ability")
@@ -74,8 +74,8 @@ class Knight(Fighter):
     def kick(self, who):
         super().kick(who)
 
+    # Some characters special ability is to attack, that's why 'who' is blank here. DO NOT remove.
     def special(self, who):
-
         self.defense *= 1.3
         self.health -= 10
         print(f"{self.name} used special ability")
@@ -96,7 +96,6 @@ class Magician(Fighter):
         super().kick(who)
 
     def special(self, who):
-
         self.strength += 30
         super().punch(who)
         self.strength -= 30
@@ -109,18 +108,18 @@ class Magician(Fighter):
 def game():
     while (True):
         print("Fighting game")
-        dec = int(input("Fighters:\n1. Warrior\n- health: 100\n- defense: 10\n- strenght: 50\n"
-                                 "Special ability = Rare(The less health you have, the more strenght you'll get.)\n"
-                                 "Special ability is permanently and take 10 points of health\n"
-                                 "\n2. Knight\n- health: 100\n- defense: 15\n- strenght: 40\n"
-                                 "Special ability = Focus on shield(Increase your defense by 30%.)\n"
-                                 "Special ability is permanently and take 10 points of health\n"
-                                 "\n3. Magician\n- health: 100\n- defense: 10\n- strenght: 30\n"
-                                 "Special ability = Crucio(Magic attack with 200% of your strength.)\n"
-                                 "Special ability take 20 points of health\n"
-                                 "\nYour choice (num): "))
+        dec = int(input("Fighters:\n1. Warrior\n- health: 100\n- defense: 10\n- strength: 50\n"
+                        "Special ability = Rare(The less health you have, the more strength you'll get.)\n"
+                        "Special ability is permanently and take 10 points of health\n"
+                        "\n2. Knight\n- health: 100\n- defense: 15\n- strength: 40\n"
+                        "Special ability = Focus on shield(Increase your defense by 30%.)\n"
+                        "Special ability is permanently and take 10 points of health\n"
+                        "\n3. Magician\n- health: 100\n- defense: 10\n- strength: 30\n"
+                        "Special ability = Crucio(Magic attack with 200% of your strength.)\n"
+                        "Special ability take 20 points of health\n"
+                        "\nYour choice (num): "))
 
-# Assign Fighter to user
+        # Assign Fighter to user.
         if (dec == 1):
             user = Warrior()
 
@@ -134,7 +133,7 @@ def game():
             print("Put correct number!")
             continue
 
-# Assign Fighter to computer
+        # Assign Fighter to computer.
         dec2 = int(input("Your enemy (num): "))
 
         if (dec2 == 1):
@@ -152,18 +151,19 @@ def game():
 
         action(user, computer)
         break
-def action(user, computer):
 
-# Assign turn to current player
+
+def action(user, computer):
+    # Assign turn to current player.
     turn = user
     not_turn = computer
 
     while (True):
 
-# Show statistics
+        # Show statistics.
         print(turn)
 
-# Select action and then run correct method
+        # Select action and then run correct method.
         if (turn == computer):
             dec = random.choice("PKS")
         else:
@@ -177,7 +177,7 @@ def action(user, computer):
 
         elif (dec == "S"):
 
-# Check if health level allow to use this action
+            # Check if health level allow to use this action.
             if (turn.can_special() == True):
                 print("Your health not allow for this action, try something different")
                 continue
@@ -188,17 +188,17 @@ def action(user, computer):
         else:
             print("Choose correct action")
 
-# Check if enemy is alive
+        # Check if enemy is alive.
         if (not_turn.health <= 0):
 
-# Only Magician can use special action when his health is the same what his special action cost
+            # Only Magician can use special action when his health is the same what his special action cost.
             if (turn.name == "Magician" and turn.health == 0):
                 print("Brave! You sacrificed yourself to win this battle.")
 
             print(f"The winner is {turn.name}!")
             break
 
-# Change turn
+        # Change turn.
         if (turn == user):
             turn = computer
             not_turn = user
@@ -207,7 +207,8 @@ def action(user, computer):
             turn = user
             not_turn = computer
 
-# run a game
+
+# Run a game.
 try:
     game()
 except ValueError:
