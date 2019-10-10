@@ -1,2 +1,3 @@
-# Practical projects
-Projects that I found in internet and try them myself
+# My_projects
+
+Some of my codes in Python
